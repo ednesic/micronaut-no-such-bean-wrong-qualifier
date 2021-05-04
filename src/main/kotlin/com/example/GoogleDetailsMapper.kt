@@ -13,10 +13,11 @@ import javax.inject.Singleton
 
 @Singleton
 @Named("google")
-class GoogleUserDetailsMapper(private val dynamoDB: AmazonDynamoDB) : OpenIdUserDetailsMapper {
+class GoogleUserDetailsMapper(private val dynamoDB: AmazonDynamoDB, private val someInterface: SomeInterface) : OpenIdUserDetailsMapper {
 
     override fun createUserDetails(providerName: String, tokenResponse: OpenIdTokenResponse, openIdClaims: OpenIdClaims): UserDetails {
         println(dynamoDB.toString())
+        println(someInterface.test())
         return UserDetails(providerName, emptyList())
     }
 }
@@ -25,4 +26,15 @@ class GoogleUserDetailsMapper(private val dynamoDB: AmazonDynamoDB) : OpenIdUser
 class AmazonDynamoDBFactory {
     @Singleton
     fun getAmazonDynamoDb(): AmazonDynamoDB = AmazonDynamoDBClientBuilder.standard().withRegion("us-east-1").build()
+}
+
+interface SomeInterface {
+    fun test()
+}
+
+@Singleton
+class SomeClassImplementation: SomeInterface {
+    override fun test() {
+
+    }
 }
