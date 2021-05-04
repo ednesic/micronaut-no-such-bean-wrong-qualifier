@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: complete
+#tag::oauth2[]
+---
+micronaut:
+  security:
+    authentication: cookie # <1>
+    oauth2:
+      enabled: true
+      clients:
+        google: # <2>
+          client-id: "anything"  # <3>
+          client-secret: "anything" # <4>
+          openid:
+            authorization:
+              prompt: select_account
+            issuer: 'https://accounts.google.com'
+    endpoints:
+      login:
+        enabled: true
+#end::oauth2[]
