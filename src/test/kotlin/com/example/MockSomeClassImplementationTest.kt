@@ -1,6 +1,6 @@
 package com.example
-import com.amazonaws.client.builder.AwsSyncClientBuilder
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.test.annotation.MockBean
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 @MicronautTest
 class MockSomeClassImplementationTest(private val embeddedServer: EmbeddedServer) {
 
-    @MockBean(AwsSyncClientBuilder::class)
+    @MockBean(AmazonDynamoDBClient::class)
     fun amazonDynamoDB(): AmazonDynamoDB = AmazonDynamoDBClientBuilder.standard().withRegion("us-east-1").build()
 
     @MockBean(SomeClassImplementation::class)
